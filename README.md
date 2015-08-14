@@ -1,2 +1,3 @@
 Study html and css
 http://glebmtb.github.io/study_html_css
+http://glebmtb.github.io/study_html_css/mission.html
