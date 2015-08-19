@@ -1,0 +1,13 @@
+@import url(http://fonts.googleapis.com/css?family=Seymour+One&subset=latin,cyrillic);
+body{
+font-family: Verdana, Geneva, Arial, sans-serif;
+font-size: small;
+}
+h1{
+font-family: 'Seymour One', sans-serif;
+font-size: 220%;
+}
+h2{
+font-size: 130%;
+}
+
