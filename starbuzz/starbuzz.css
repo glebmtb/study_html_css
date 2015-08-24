@@ -96,8 +96,8 @@ div#tableRow {
 
 #award {
     position: absolute;
-    top: 30px;
-    left: 365px;
+    top: 20px;
+    left: 40%;
     z-index: 1;
 }
 
@@ -114,4 +114,31 @@ img {
 
 #coupon:hover {
     left: -10px;
+}
+
+nav {
+    background-color: #efe5d0;
+    margin: 10px 10px 0px 10px;
+}
+
+nav ul {
+    margin: 0px;
+    list-style-type: none;
+    padding: 5px 0px 5px 10px;
+}
+
+nav ul li {
+    display: inline;
+    padding: 5px 10px 5px 10px;
+}
+
+nav ul li a:link,
+nav ul li a:visited {
+    color: #954d4d;
+    border-bottom: none;
+    font-weight: bold;
+}
+
+nav ul li.selected {
+    background-color: #c8d99c;
 }
