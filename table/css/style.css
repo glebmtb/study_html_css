@@ -1,0 +1,48 @@
+body {
+    font-family: Verdana, Geneva, Arial, sans-serif;
+    font-size: small;
+}
+
+td,
+th {
+    border: thin dotted gray;
+    padding: 5px;
+    text-align: center;
+}
+
+th {
+    background-color: #cc6600;
+}
+
+table {
+    margin: 0px 20px 0px 20px;
+    border: thin solid black;
+    caption-side: bottom;
+    border-collapse: collapse;
+}
+
+caption {
+    font-style: italic;
+    padding-top: 8px;
+}
+
+.tdCity {
+    text-align: left;
+}
+
+.tdHeight,
+.tdPopulation {
+    text-align: right;
+}
+
+tr:nth-child(odd) {
+    background-color: #fcba7a;
+}
+
+#ratingMeksiko th {
+    background-color: white;
+}
+
+.notcolorspace td{
+	background-color: white;
+}
