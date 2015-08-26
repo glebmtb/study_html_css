@@ -1,9 +1,92 @@
+@import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);
 body {
     font-family: Verdana, Geneva, Arial, sans-serif;
     font-size: small;
     margin: 0px;
+    background-image: url("../images/background.png");
 }
 
 h1 {
     font-size: 120%;
+}
+
+#container {
+    /* Выравнивание по центру */
+    margin: 10px auto;
+    width: 800px;
+}
+
+@media only screen and (width: 800px) {
+    #container {
+        /* Ширина слоя */
+        width: none;
+    }
+}
+
+#header {
+    height: 100px;
+    /* Размер текста */
+    font-size: 4.2em;
+    /* Выравнивание по центру */
+    text-align: left;
+    /* Отступы вокруг текста */
+    padding: 0px;
+    /* Цвет фона шапки */
+    background: #8fa09b;
+    /* Цвет текста */
+    color: red;
+    margin: 0px 10px 0px 10px;
+}
+
+#header p {
+    margin: 0px 0px 0px 20px;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+#sidebar {
+    margin: 10px 10px 0px 10px;
+    /* Отступы вокруг текста */
+    padding: 0px;
+    background: #8fa09b;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    margin: 0px;
+}
+
+#sidebar a:link,
+#sidebar a:visited {
+    color: #954d4d;
+    border-bottom: none;
+    font-weight: bold;
+}
+
+#sidebar li {
+    display: inline;
+}
+
+#content {
+    /* Поля вокруг текста */
+    padding: 10px;
+    margin: 10px 10px 0px 10px;
+    /* Цвет фона правой колонки */
+    background: #8fa09b;
+}
+
+#footer {
+    /* Цвет фона подвала */
+    background: #8fa09b;
+    /* Цвет текста */
+    color: #fff;
+    /* Отступы вокруг текста */
+    padding: 0px;
+    margin: 10px 10px 0px 10px;
+    /* Отменяем действие float */
+    clear: left;
+    height: 30px
+}
+
+#aboutme {
+    height: 500px;
 }
