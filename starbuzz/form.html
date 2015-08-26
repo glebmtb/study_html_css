@@ -43,6 +43,39 @@
             <section id="main">
                 <h1>Starbuzz Bean Machine</h1>
                 <h2>Заполните следующую форму и нажмите кнопку «Заказать сейчас», чтобы оформить заказ</h2>
+                <form action="http://starbuzzcoffee.com/processorder.php" method="POST">
+                	<p>
+                		Выберите кофе:
+                		<select name="beans">
+                			<option value="Смесь">Домашняя смесь</option>
+                			<option value="Боливия">Боливия</option>
+                			<option value="Гватемала">Гватемала</option>
+                			<option value="Кения">Кения</option>
+                		</select>
+                	</p>
+                	<p>Тип: <br>
+                		<input type="radio" name="beantype" value="зерна"> Кофе в зернах<br>
+                		<input type="radio" name="beantype" value="молотый"> Молотый кофе 
+                	</p>
+                    <p>Доставить по адресу:
+                        <br> Имя:
+                        <input type="text" name="name">
+                        <br> Адрес:
+                        <input type="text" name="address">
+                        <br> Город:
+                        <input type="text" name="city">
+                        <br> Страна:
+                        <input type="text" name="state">
+                        <br> Почтовый индекс:
+                        <input type="text" name="zip">
+                        <br> Телефон:
+                        <input type="tel" name="phone">
+                        <br>
+                    </p>
+                    <p>
+                        <input type="submit" value="Заказать сейчас">
+                    </p>
+                </form>
             </section>
         </div>
     </div>
