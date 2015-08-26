@@ -52,11 +52,6 @@ h1 {
     color: #954b4b;
 }
 
-h2 {
-    font-size: 100%;
-    color: #954b4b;
-}
-
 .slogan {
     color: #954b4b;
 }
@@ -146,4 +141,39 @@ nav ul li a:visited {
 
 nav ul li.selected {
     background-color: #c8d99c;
+}
+
+h2 {
+    font-size: 110%;
+    color: black;
+}
+
+form div.tableRow p {
+    display: table-cell;
+    vertical-align: top;
+    padding: 3px;
+}
+
+form div.tableRow {
+    display: table-row;
+}
+
+form {
+    display: table;
+    padding: 10px;
+    border: thin dotted #7e7e7e;
+    background-color: #e1c1b8;
+}
+
+form textarea {
+    width: 500px;
+    height: 200px;
+}
+
+form div.tableRow p:first-child{
+    text-align: right;
+}
+
+form p.heading{
+    font-weight: bold;
 }
