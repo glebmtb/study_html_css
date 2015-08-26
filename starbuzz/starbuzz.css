@@ -170,10 +170,18 @@ form textarea {
     height: 200px;
 }
 
-form div.tableRow p:first-child{
+form div.tableRow p:first-child {
     text-align: right;
 }
 
-form p.heading{
+form p.heading {
     font-weight: bold;
+}
+
+input[required] {
+    border: black thin solid;
+}
+
+input[required]:valid {
+    border: none;
 }
