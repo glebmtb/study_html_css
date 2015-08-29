@@ -1,28 +1,9 @@
-/*@import url(http://fonts.googleapis.com/css?family=Seymour+One&subset=latin,cyrillic);
-body{
-font-family: Verdana, Geneva, Arial, sans-serif;
-font-size: small;
-}
-h1{
-font-family: 'Seymour One', sans-serif;
-font-size: 240%;
-}
-h2{
-font-size: 130%;
-font-weight: normal;
+@import url(http://fonts.googleapis.com/css?family=Seymour+One&subset=latin,cyrillic);
+.page-header h1 {
+    font-family: 'Seymour One', sans-serif;
 }
 
-blockquote{
-font-style: italic;
-
+h2 {
+    font-size: 170%;
+    border-bottom: thin dotted #888888;
 }
-
-h1, h2{
-color: #cc6600;
-border-bottom: thin dotted #888888;
-}
-
-em{
-text-decoration: none;
-}
-*/
