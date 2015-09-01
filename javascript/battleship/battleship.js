@@ -13,8 +13,6 @@ var view = {
         cell.setAttribute("class", "miss");
     },
     disabledControl: function() {
-        document.getElementById("fireButton").setAttribute("disabled", "disabled");
-        document.getElementById("guessInput").setAttribute("disabled", "disabled");
         var tables = document.getElementsByTagName("td");
         for (var i = 0; i < tables.length; i++) {
             tables[i].onclick = null;
@@ -106,58 +104,27 @@ var model = {
     }
 };
 
-function parseGuess(guess) {
-    var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
-    if (guess === null || guess.length !== 2) {
-        alert("Oops, please enter a letter and a number on the board."); //TODO подсветить окно
-    } else {
-        var row = alphabet.indexOf(guess.charAt(0));
-        var column = guess.charAt(1);
-        if (isNaN(row) || isNaN(column)) {
-            alert("Oops, that isn't on the board.");
-        } else if (row < 0 || row >= model.boardSize || column < 0 || column >= model.boardSize) {
-            alert("Oops, that's off the board!");
-        } else {
-            return row + column;
-        }
-    }
-    return null;
-}
-
 var controller = {
     guesses: 0,
     processGuess: function(guess) {
-        var location = parseGuess(guess);
-        if (location) {
-            this.guesses++;
-            var hit = model.fire(location);
-            if (hit && model.shipsSunk === model.numShips) {
-                view.displayMessage("Вы потопили все мои коробли в " + this.guesses + " попыток");
-                view.disabledControl();
-            }
+        this.guesses++;
+        var hit = model.fire(guess);
+        if (hit && model.shipsSunk === model.numShips) {
+            view.displayMessage("Вы потопили все мои коробли в " + this.guesses + " попыток");
+            view.disabledControl();
         }
+
     }
 }
 
 window.onload = function() {
-    document.getElementById("formControl").onsubmit = handleFireForm;
-    document.getElementById("guessInput").setAttribute("pattern", "[A-Ga-g][0-6]");
-    model.generateShipLocations();
-    var tables = document.getElementsByTagName("td");
-    for (var i = 0; i < tables.length; i++) {
-        tables[i].onclick = hadleFireTable;
+    var cells = document.getElementsByTagName("td");
+    for (var i = 0; i < cells.length; i++) {
+        cells[i].onclick = hadleFireTable;
     }
-}
-
-function handleFireForm() {
-    var value = document.getElementById("guessInput").value;
-    controller.processGuess(value.trim().toUpperCase());
-    document.getElementById("guessInput").value = "";
-    return false;
+    model.generateShipLocations();
 }
 
 function hadleFireTable() {
-    var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
-    var call = alphabet[this.id.charAt(0)] + this.id.charAt(1);
-    controller.processGuess(call);
+    controller.processGuess(this.id);
 }

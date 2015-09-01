@@ -30,20 +30,6 @@ td {
     height: 94px;
 }
 
-form.form-inline {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 15px;
-    /*background-color: rgb(83, 175, 19);*/
-}
-
-form.form-inline input {
-    /*background-color: rgb(152, 207, 113);*/
-    border-color: rgb(83, 175, 19);
-    font-size: 1em;
-}
-
 .hit {
     background: url("ship.png") no-repeat center center;
 }
