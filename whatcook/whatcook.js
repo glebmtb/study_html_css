@@ -7,9 +7,11 @@ function getRandom(count) {
 }
 
 $(window).load(function() {
-    $("button").click(function() {
+	var generate = function() {
         $("#soup").html(soup[getRandom(soup.length)]);
         $("#garnish").html(garnish[getRandom(garnish.length)]);
         $("#meat").html(meat[getRandom(meat.length)]);
-    });
+    };
+    $("button").click(generate);
+    generate();
 });
