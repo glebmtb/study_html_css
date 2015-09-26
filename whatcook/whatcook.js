@@ -6,8 +6,8 @@ function getRandom(count) {
     return Math.floor(Math.random() * count);
 }
 
-$(window).load(function() {
-	var generate = function() {
+$(window).load(function () {
+    var generate = function () {
         $("#soup").html(soup[getRandom(soup.length)]);
         $("#garnish").html(garnish[getRandom(garnish.length)]);
         $("#meat").html(meat[getRandom(meat.length)]);

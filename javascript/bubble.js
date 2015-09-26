@@ -19,7 +19,6 @@ var bestSolutions = [];
 var cheapSolutionIndex;
 
 
-
 for (var index = 0; index < scores.length; index++) {
     var log = "Мыльные пузырь решение #" + index + " количество шаров: " + scores[index];
     document.write(log + "<br>");

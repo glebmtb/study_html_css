@@ -22,8 +22,7 @@ while (isSink == false) {
         } else if (location2 == guess) {
             isHits = true;
             location2 = -1;
-        } else
-        if (location3 == guess) {
+        } else if (location3 == guess) {
             isHits = true;
             location3 = -1;
         } else {

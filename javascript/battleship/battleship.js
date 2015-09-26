@@ -1,18 +1,18 @@
 var view = {
-    displayMessage: function(msg) {
+    displayMessage: function (msg) {
         var messageArea = document.getElementById("messageArea");
         messageArea.innerHTML = msg;
     },
 
-    displayHit: function(location) {
+    displayHit: function (location) {
         var cell = document.getElementById(location);
         cell.setAttribute("class", "hit");
     },
-    displayMiss: function(location) {
+    displayMiss: function (location) {
         var cell = document.getElementById(location);
         cell.setAttribute("class", "miss");
     },
-    disabledControl: function() {
+    disabledControl: function () {
         var tables = document.getElementsByTagName("td");
         for (var i = 0; i < tables.length; i++) {
             tables[i].onclick = null;
@@ -35,7 +35,7 @@ var model = {
         locations: [0, 0, 0],
         hits: ["", "", ""]
     }],
-    fire: function(guess) {
+    fire: function (guess) {
         for (var i = 0; i < this.numShips; i++) {
             var ship = this.ships[i];
             var index = ship.locations.indexOf(guess);
@@ -54,7 +54,7 @@ var model = {
         view.displayMessage("ТЫ ПРОМАХНУЛСЯ!");
         return false;
     },
-    isSunk: function(ship) {
+    isSunk: function (ship) {
         for (var i = 0; i < this.shipLength; i++) {
             if (ship.hits[i] !== "hit") {
                 return false;
@@ -62,7 +62,7 @@ var model = {
         }
         return true;
     },
-    generateShipLocations: function() {
+    generateShipLocations: function () {
         var locations;
         for (var i = 0; i < this.numShips; i++) {
             do {
@@ -71,7 +71,7 @@ var model = {
             this.ships[i].locations = locations;
         }
     },
-    generateShip: function() {
+    generateShip: function () {
         var direction = Math.floor(Math.random() * 2);
         var row, col;
         var newShipLocations = [];
@@ -91,7 +91,7 @@ var model = {
         }
         return newShipLocations;
     },
-    collision: function(locations) {
+    collision: function (locations) {
         for (var i = 0; i < this.numShips; i++) {
             var ship = model.ships[i];
             for (var j = 0; j < locations.length; j++) {
@@ -106,7 +106,7 @@ var model = {
 
 var controller = {
     guesses: 0,
-    processGuess: function(guess) {
+    processGuess: function (guess) {
         this.guesses++;
         var hit = model.fire(guess);
         if (hit && model.shipsSunk === model.numShips) {
@@ -117,7 +117,7 @@ var controller = {
     }
 }
 
-window.onload = function() {
+window.onload = function () {
     var cells = document.getElementsByTagName("td");
     for (var i = 0; i < cells.length; i++) {
         cells[i].onclick = hadleFireTable;
