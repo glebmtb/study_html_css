@@ -7,7 +7,10 @@
 #timeSheet {
     border: 1px solid #ccc;
     border-radius: 6px;
-    /*margin-right: 5px;*/
+}
+
+.showAction{
+    width: 30%;
 }
 
 #currentAction {

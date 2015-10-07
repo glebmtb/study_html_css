@@ -22,7 +22,7 @@ var table = {
             newTime += this.defaultTime;
             time.setMinutes(0);
             time.setSeconds(newTime);
-            table.append('<tr id="' + "action" + (cAction * 3) + '"><td>' + (cAction + 1) + "</td><td>" + getTimeFormat(time) + '</td><td>Вдох</td><td class="showAction"></td></tr>');
+            table.append('<tr id="' + "action" + (cAction * 3) + '"><td class="text-center">' + (cAction + 1) + "</td><td>" + getTimeFormat(time) + '</td><td>Вдох</td><td class="showAction"></td></tr>');
             newTime += this.defaultTime * 4;
             time.setMinutes(0);
             time.setSeconds(newTime);
@@ -83,20 +83,21 @@ var timer = {
         }
 
 
-        if (timer.currentStep > 10) {
-            clearTimeout(timer.time);
+        if (timer.currentStep > 9) {
             $("#btnText").html("Stop");
             $("#timerTable").html("");
             $(".showAction").html("");
             $("#currentAction").html("Закончили");
+            clearTimeout(timer.time);
+        } else {
+            timer.setActionInForm();
         }
-        timer.setActionInForm();
     },
 
     setActionInForm: function () {
-        this.currentDate.setMinutes(0);
-        this.currentDate.setSeconds(this.currentTime);
-        var textTime = getTimeFormat(this.currentDate);
+        timer.currentDate.setMinutes(0);
+        timer.currentDate.setSeconds(timer.currentTime);
+        var textTime = getTimeFormat(timer.currentDate);
         $("#btnText").html(textTime);
         $("#timerTable").html(timer.nextTime - timer.currentTime);
 
@@ -117,6 +118,6 @@ var timer = {
         $("#btnGlyph").removeAttr("class").addClass("glyphicon glyphicon-time");
         $("#btnStart").unbind();
         timer.setActionInForm();
-        this.time = setInterval(timer.makeStep, 1000);
+        timer.time = setInterval(timer.makeStep, 1000);
     }
 }
