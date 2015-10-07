@@ -52,12 +52,19 @@ $(document).ready(function () {
         if ($(this).is('[class*="active"]')) {
             $(this).removeClass("active");
             $("#btnChange").addClass("disabled");
+            $("#btnChange").removeAttr("data-target");
             $("#btnRemove").addClass("disabled");
         } else {
             $(this).addClass("active").siblings().removeClass("active");
             $("#btnChange").removeClass("disabled");
+            $("#btnChange").attr("data-target","#formChangeItem");
             $("#btnRemove").removeClass("disabled");
         }
+    });
+
+    $("tr").dblclick(function(){
+        $(this).addClass("active").siblings().removeClass("active");
+        $('#formChangeItem').modal();
     });
 
     $('#formChangeItem').on('show.bs.modal', function (event) {
@@ -69,7 +76,7 @@ $(document).ready(function () {
             modal.find('.modal-title').text('Добавление нового друга');
             modal.find('#inputName').val("");
             modal.find('#inputDate').val("");
-        } else if ('cng' === recipient) {
+        } else if ('cng' === recipient || true) {
             modal.find('.modal-title').text('Изминение данных друга');
             var id = view.getSelectId();
             var item = model.getById(id);
