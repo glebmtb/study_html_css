@@ -98,7 +98,7 @@ var timer = {
         this.currentDate.setSeconds(this.currentTime);
         var textTime = getTimeFormat(this.currentDate);
         $("#btnText").html(textTime);
-        $("#timerTable").html(textTime);
+        $("#timerTable").html(timer.nextTime - timer.currentTime);
 
 
         if (timer.oldAction != timer.currentAction) {
@@ -106,7 +106,7 @@ var timer = {
             $(selectRow).addClass("active").siblings().removeClass("active");
             timer.oldAction = timer.currentAction;
             $(".showAction").html("");
-            $(selectRow + " .showAction").html('<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span id="timerTable">' + textTime + '</span>')
+            $(selectRow + " .showAction").html('<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span id="timerTable">' + (timer.nextTime - timer.currentTime) + '</span>')
             $("#currentAction").html(timer.action[timer.currentAction]);
         }
 
