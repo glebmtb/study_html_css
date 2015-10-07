@@ -1,0 +1,20 @@
+#header {
+    color: #fff;
+    background: linear-gradient(to bottom, #563d7c 0, #6f5499 100%) repeat-x;
+    font-family: 'Marck Script', cursive;
+}
+
+#timeSheet {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-right: 5px;
+}
+
+#currentAction {
+    font-size: 400%;
+}
+
+#bodyTable tr>td{
+    padding: 1px;
+    font-size: 70%;
+}

@@ -1,10 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Тренировка дыхания</title>
+    <link rel="stylesheet" href="../thirdParty/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" type="text/css" href="breath.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <header id="header" class="col-md-8 col-md-offset-2 page-header">
+            <h1>Тренировка дыхания</h1>
+        </header>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-2" id="timeSheet">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="bodyTable">
+                <!--will load table-->
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-5">
+            <div class="row">
+                <button class="btn btn-default btn-lg btn-block" id="btnStart" onselectstart="return false" onmousedown="return false">
+                    <span class="glyphicon glyphicon-play-circle" id="btnGlyph" aria-hidden="true"></span> <span id="btnText">Start</span>
+                </button>
+            </div>
+            <div class="row">
+            </div>
+            <div class="row">
+                <p class="text-center" id="currentAction"></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <footer class="col-md-8 col-md-offset-2">
+            &copy; Глеб Беляев
+        </footer>
+    </div>
+</div>
+
+<script src="../thirdParty/js/jquery-1.11.3.min.js"></script>
+<script src="../thirdParty/js/bootstrap.min.js"></script>
+<script src="breath.js"></script>
 </body>
+
 </html>
