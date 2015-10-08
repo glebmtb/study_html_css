@@ -18,7 +18,8 @@ var model = {
     },
 
     deleteItem: function (id) {
-
+        var item = $("#" + id);
+        item.remove();
     },
 
     updateItem: function (item) {
@@ -27,7 +28,7 @@ var model = {
 
     getById: function (id) {
         for (var it in this.items) {
-            if(id == this.items[it].id){
+            if (id == this.items[it].id) {
                 return this.items[it];
             }
         }
@@ -35,12 +36,32 @@ var model = {
 }
 
 var view = {
-    getSelectId: function() {
+    getSelectId: function () {
         return $("#list_birthday tbody tr[class=active]").attr("id");
+    },
+
+    disabledBtnEditAndRemove: function(isDisabled){
+        if(isDisabled){
+            $("#btnChange").addClass("disabled");
+            $("#btnChange").removeAttr("data-target");
+            $("#btnRemove").addClass("disabled");
+            $("#btnRemove").off();
+        }else{
+            $("#btnChange").removeClass("disabled");
+            $("#btnChange").attr("data-target", "#formChangeItem");
+            $("#btnRemove").removeClass("disabled");
+            $("#btnRemove").click(control.deleteItem);
+        }
     }
 }
 
-var control = {}
+var control = {
+    deleteItem: function(){
+        var id = view.getSelectId();
+        view.disabledBtnEditAndRemove(true);
+        model.deleteItem(id);
+    }
+};
 
 $(document).ready(function () {
     var items = model.loadList();
@@ -51,14 +72,10 @@ $(document).ready(function () {
     $("tr").click(function () {
         if ($(this).is('[class*="active"]')) {
             $(this).removeClass("active");
-            $("#btnChange").addClass("disabled");
-            $("#btnChange").removeAttr("data-target");
-            $("#btnRemove").addClass("disabled");
+            view.disabledBtnEditAndRemove(true);
         } else {
             $(this).addClass("active").siblings().removeClass("active");
-            $("#btnChange").removeClass("disabled");
-            $("#btnChange").attr("data-target","#formChangeItem");
-            $("#btnRemove").removeClass("disabled");
+            view.disabledBtnEditAndRemove(false);
         }
     });
 
