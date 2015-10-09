@@ -40,13 +40,13 @@ var view = {
         return $("#list_birthday tbody tr[class=active]").attr("id");
     },
 
-    disabledBtnEditAndRemove: function(isDisabled){
-        if(isDisabled){
+    disabledBtnEditAndRemove: function (isDisabled) {
+        if (isDisabled) {
             $("#btnChange").addClass("disabled");
             $("#btnChange").removeAttr("data-target");
             $("#btnRemove").addClass("disabled");
             $("#btnRemove").off();
-        }else{
+        } else {
             $("#btnChange").removeClass("disabled");
             $("#btnChange").attr("data-target", "#formChangeItem");
             $("#btnRemove").removeClass("disabled");
@@ -56,20 +56,18 @@ var view = {
 }
 
 var control = {
-    deleteItem: function(){
+    deleteItem: function () {
         var id = view.getSelectId();
         view.disabledBtnEditAndRemove(true);
         model.deleteItem(id);
-    }
-};
-
-$(document).ready(function () {
-    var items = model.loadList();
-    for (var it in items) {
-        $('#list_birthday tbody').append('<tr id="' + items[it].id + '"><td>' + (1 + Number(it)) + '</td><td>' + items[it].name + '</td><td>' + items[it].date + '</td><td>' + items[it].leftDay + '</td></tr>');
-    }
-
-    $("tr").click(function () {
+    },
+    saveItem: function () {
+    },
+    doubleClickOnRow: function () {
+        $(this).addClass("active").siblings().removeClass("active");
+        $('#formChangeItem').modal();
+    },
+    oneClickOnRow: function () {
         if ($(this).is('[class*="active"]')) {
             $(this).removeClass("active");
             view.disabledBtnEditAndRemove(true);
@@ -77,14 +75,8 @@ $(document).ready(function () {
             $(this).addClass("active").siblings().removeClass("active");
             view.disabledBtnEditAndRemove(false);
         }
-    });
-
-    $("tr").dblclick(function(){
-        $(this).addClass("active").siblings().removeClass("active");
-        $('#formChangeItem').modal();
-    });
-
-    $('#formChangeItem').on('show.bs.modal', function (event) {
+    },
+    loadModalAddAndChange: function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var recipient = button.data('whatever'); // Extract info from data-* attributes
 
@@ -93,12 +85,33 @@ $(document).ready(function () {
             modal.find('.modal-title').text('Добавление нового друга');
             modal.find('#inputName').val("");
             modal.find('#inputDate').val("");
+            control.selectItem = null;
         } else if ('cng' === recipient || true) {
             modal.find('.modal-title').text('Изминение данных друга');
             var id = view.getSelectId();
             var item = model.getById(id);
             modal.find('#inputName').val(item.name);
             modal.find('#inputDate').val(item.date);
+            control.selectItem = item;
         }
-    })
+    },
+
+    refreshGrid: function(){
+        var items = model.loadList();
+        var bodyTable =  $('#list_birthday tbody');
+        bodyTable.empty();
+        for (var it in items) {
+            bodyTable.append('<tr id="' + items[it].id + '"><td>' + (1 + Number(it)) + '</td><td>' + items[it].name + '</td><td>' + items[it].date + '</td><td>' + items[it].leftDay + '</td></tr>');
+        }
+
+        var rows = $("#list_birthday tbody tr");
+        rows.click(control.oneClickOnRow);
+        rows.dblclick(control.doubleClickOnRow);
+    }
+};
+
+$(document).ready(function () {
+    control.refreshGrid();
+    $('#formChangeItem').on('show.bs.modal', control.loadModalAddAndChange);
+    $("#btnRefresh").click(control.refreshGrid);
 })
