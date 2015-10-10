@@ -40,25 +40,42 @@ var view = {
         return $("#list_birthday tbody tr[class=active]").attr("id");
     },
 
-    disabledBtnEditAndRemove: function (isDisabled) {
+    disabledBtnEdit: function (isDisabled) {
+        var btnChange = view.getBtnChange();
         if (isDisabled) {
-            $("#btnChange").addClass("disabled");
-            $("#btnChange").removeAttr("data-target");
-            $("#btnRemove").addClass("disabled");
-            $("#btnRemove").off();
+            btnChange.addClass("disabled");
+            btnChange.removeAttr("data-target");
         } else {
-            $("#btnChange").removeClass("disabled");
-            $("#btnChange").attr("data-target", "#formChangeItem");
-            $("#btnRemove").removeClass("disabled");
-            $("#btnRemove").click(control.deleteItem);
+            btnChange.removeClass("disabled");
+            btnChange.attr("data-target", "#formChangeItem");
         }
+    },
+    disabledBtnRemove: function (isDisabled) {
+        var btnRemove = view.getBtnRemove();
+        if (isDisabled) {
+            btnRemove.addClass("disabled");
+            btnRemove.off();
+        } else {
+            btnRemove.removeClass("disabled");
+            btnRemove.click(control.deleteItem);
+        }
+    },
+    getBtnChange: function () {
+        return $("#btnChange");
+    },
+    getBtnRemove: function () {
+        return $("#btnRemove");
+    },
+    getBtnRefresh: function () {
+        return $("#btnRefresh");
     }
 }
 
 var control = {
     deleteItem: function () {
         var id = view.getSelectId();
-        view.disabledBtnEditAndRemove(true);
+        view.disabledBtnEdit(true);
+        view.disabledBtnRemove(true);
         model.deleteItem(id);
     },
     saveItem: function () {
@@ -70,10 +87,12 @@ var control = {
     oneClickOnRow: function () {
         if ($(this).is('[class*="active"]')) {
             $(this).removeClass("active");
-            view.disabledBtnEditAndRemove(true);
+            view.disabledBtnEdit(true);
+            view.disabledBtnRemove(true);
         } else {
             $(this).addClass("active").siblings().removeClass("active");
-            view.disabledBtnEditAndRemove(false);
+            view.disabledBtnEdit(false);
+            view.disabledBtnRemove(false);
         }
     },
     loadModalAddAndChange: function (event) {
@@ -96,9 +115,9 @@ var control = {
         }
     },
 
-    refreshGrid: function(){
+    refreshGrid: function () {
         var items = model.loadList();
-        var bodyTable =  $('#list_birthday tbody');
+        var bodyTable = $('#list_birthday tbody');
         bodyTable.empty();
         for (var it in items) {
             bodyTable.append('<tr id="' + items[it].id + '"><td>' + (1 + Number(it)) + '</td><td>' + items[it].name + '</td><td>' + items[it].date + '</td><td>' + items[it].leftDay + '</td></tr>');
@@ -113,5 +132,5 @@ var control = {
 $(document).ready(function () {
     control.refreshGrid();
     $('#formChangeItem').on('show.bs.modal', control.loadModalAddAndChange);
-    $("#btnRefresh").click(control.refreshGrid);
+    view.getBtnRefresh().click(control.refreshGrid);
 })
