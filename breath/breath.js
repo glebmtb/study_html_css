@@ -100,7 +100,7 @@ var timer = {
         var textTime = getTimeFormat(timer.currentDate);
         $("#btnText").html(textTime);
         $("#timerTable").html(timer.nextTime - timer.currentTime);
-        $("#currentAction").html(timer.action[timer.currentAction] + ' (-' + (timer.nextTime - timer.currentTime) + ')');
+        $("#currentAction").html((timer.currentStep + 1) + '. ' + timer.action[timer.currentAction] + ' (-' + (timer.nextTime - timer.currentTime - 1) + ')');
 
 
         if (timer.oldAction != timer.currentAction) {
