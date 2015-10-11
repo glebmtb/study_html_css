@@ -13,8 +13,8 @@ var model = {
     },
 
     loadList: function () {
-        this.items = JSON.parse(this.itemsJSON);
-        return this.items;
+        model.items = JSON.parse(model.itemsJSON);
+        return model.items;
     },
 
     deleteItem: function (id) {
@@ -23,13 +23,13 @@ var model = {
     },
 
     updateItem: function (item) {
-
+        model.items[item.id] = item;
     },
 
     getById: function (id) {
-        for (var it in this.items) {
-            if (id == this.items[it].id) {
-                return this.items[it];
+        for (var it in model.items) {
+            if (id == model.items[it].id) {
+                return model.items[it];
             }
         }
     }
@@ -68,6 +68,12 @@ var view = {
     },
     getBtnRefresh: function () {
         return $("#btnRefresh");
+    },
+    getEditForm: function () {
+        return $('#formChangeItem');
+    },
+    getBtnSave: function () {
+        return $("#btnSave");
     }
 }
 
@@ -78,11 +84,20 @@ var control = {
         view.disabledBtnRemove(true);
         model.deleteItem(id);
     },
-    saveItem: function () {
+    saveNewItem: function () {
+    },
+    updateItem: function (id, name, date) {
+        var item = {
+            id: id,
+            name: name,
+            date: date
+        };
+        model.updateItem(item);
+        control.refreshGrid();
     },
     doubleClickOnRow: function () {
         $(this).addClass("active").siblings().removeClass("active");
-        $('#formChangeItem').modal();
+        view.getEditForm().modal();
     },
     oneClickOnRow: function () {
         if ($(this).is('[class*="active"]')) {
@@ -95,22 +110,30 @@ var control = {
             view.disabledBtnRemove(false);
         }
     },
-    loadModalAddAndChange: function (event) {
+    loadEditForm: function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var recipient = button.data('whatever'); // Extract info from data-* attributes
 
         var modal = $(this);
+        var inputName = modal.find('#inputName');
+        var inputDate = modal.find('#inputDate');
+        var btnSave = modal.find('#btnSave');
         if ('add' === recipient) {
             modal.find('.modal-title').text('Добавление нового друга');
-            modal.find('#inputName').val("");
-            modal.find('#inputDate').val("");
+            inputName.val("");
+            inputDate.val("");
+            btnSave.click(control.saveNewItem);
             control.selectItem = null;
         } else if ('cng' === recipient || true) {
             modal.find('.modal-title').text('Изминение данных друга');
             var id = view.getSelectId();
             var item = model.getById(id);
-            modal.find('#inputName').val(item.name);
-            modal.find('#inputDate').val(item.date);
+            inputName.val(item.name);
+            inputDate.val(item.date);
+            btnSave.click(function () {
+                control.updateItem(id, inputName.val(), inputDate.val());
+                modal.modal('hide');
+            });
             control.selectItem = item;
         }
     },
@@ -131,6 +154,6 @@ var control = {
 
 $(document).ready(function () {
     control.refreshGrid();
-    $('#formChangeItem').on('show.bs.modal', control.loadModalAddAndChange);
+    view.getEditForm().on('show.bs.modal', control.loadEditForm);
     view.getBtnRefresh().click(control.refreshGrid);
 })
