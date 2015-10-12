@@ -13,7 +13,8 @@ var model = {
     },
 
     loadList: function () {
-        model.items = JSON.parse(model.itemsJSON);
+        if (!model.items)
+            model.items = JSON.parse(model.itemsJSON);
         return model.items;
     },
 
@@ -23,7 +24,13 @@ var model = {
     },
 
     updateItem: function (item) {
-        model.items[item.id] = item;
+        for (var it in model.items) {
+            if (item.id == model.items[it].id) {
+                model.items[it] = item;
+                break;
+            }
+        }
+
     },
 
     getById: function (id) {
@@ -87,11 +94,9 @@ var control = {
     saveNewItem: function () {
     },
     updateItem: function (id, name, date) {
-        var item = {
-            id: id,
-            name: name,
-            date: date
-        };
+        var item = model.getById(id);
+        item.name = name;
+        item.date = date;
         model.updateItem(item);
         control.refreshGrid();
     },
@@ -130,6 +135,7 @@ var control = {
             var item = model.getById(id);
             inputName.val(item.name);
             inputDate.val(item.date);
+            btnSave.off();
             btnSave.click(function () {
                 control.updateItem(id, inputName.val(), inputDate.val());
                 modal.modal('hide');
